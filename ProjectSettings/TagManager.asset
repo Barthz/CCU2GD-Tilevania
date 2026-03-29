@@ -50,5 +50,8 @@ TagManager:
   - name: Platforms
     uniqueID: 3546471879
     locked: 0
+  - name: Player
+    uniqueID: 1926884157
+    locked: 0
   m_RenderingLayers:
   - Default
