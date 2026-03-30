@@ -9,14 +9,14 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
+    Animator myAnimator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Run();
@@ -32,16 +32,21 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 playerVelocity = new Vector2(moveInput.x * moveSpeed, myRigidbody.linearVelocity.y);
         myRigidbody.linearVelocity = playerVelocity;
+
+        myAnimator.SetBool("isRunning", hasHorizontalSpeed());
     }
 
     void FlipSprite()
     {
-        bool hasHorizontalSpeed = Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
-
-        if (hasHorizontalSpeed)
+        if (hasHorizontalSpeed())
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.linearVelocity.x), 1f);
         }
     
+    }
+
+    bool hasHorizontalSpeed()
+    {
+        return Mathf.Abs(myRigidbody.linearVelocity.x) > Mathf.Epsilon;
     }
 }
